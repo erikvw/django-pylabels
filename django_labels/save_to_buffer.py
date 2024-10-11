@@ -1,12 +1,15 @@
-from collections.abc import Callable, Generator, Iterable
 from io import BytesIO
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from pylabels import Sheet, Specification
-from reportlab.graphics.shapes import Drawing
 from reportlab.pdfgen import canvas
 
 from .get_label_specification import get_label_specification
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from reportlab.graphics.shapes import Drawing
 
 
 def blank_buffer() -> BytesIO:
