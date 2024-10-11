@@ -15,14 +15,9 @@ classifiers = [
 ]
 license = {file = "LICENSE"}
 
-[tool.setuptools.packages.find]
-where = ["django_labels"]
-include = ["django_labels*"]
-exclude = ["django_labels.tests*"]
-namespaces = false  # true by default
-
 [build-system]
 requires = ["setuptools>=60", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 version_file="_version.py"
