@@ -60,9 +60,12 @@ exclude = [
     '.tox',
     '.git',
     '__pycache__',
-    'build,dist',
+    'build',
+    'dist',
     '.eggs'
 ]
 
-
-
+[tool.setuptools.packages.find]
+include = ["django_labels*", "django_labels/templates/*.html"]
+exclude = ["django_labels.tests*"]
+namespaces = false  # true by default
