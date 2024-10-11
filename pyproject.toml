@@ -1,0 +1,53 @@
+[project]
+name = "django-labels"
+dynamic = ["version"]
+description = "Use pylabels in Django"
+readme = "README.rst"
+dependencies = ['pylabels']
+requires-python = '>=3.12'
+keywords = ['Django labels avery']
+authors = [{name="Erik van Widenfelt", email="ew2789@gmail.com"}]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+]
+license = {file = "LICENSE"}
+
+[tool.setuptools.packages.find]
+where = ["django_labels"]
+include = ["django_labels*"]
+exclude = ["django_labels.tests*"]
+namespaces = false  # true by default
+
+[build-system]
+requires = ["setuptools>=60", "setuptools-scm>=8.0"]
+
+[tool.setuptools_scm]
+version_file="_version.py"
+
+[tool.black]
+line-length = 95
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+py_version = "312"
+skip = [".tox", ".eggs"]
+
+[tool.coverage.run]
+parallel = false
+branch = true
+source = ["django_labels"]
+
+[tool.coverage.paths]
+source = ["django_labels"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_lines = [
+  "pragma: no cover",
+  "if TYPE_CHECKING:",
+]
