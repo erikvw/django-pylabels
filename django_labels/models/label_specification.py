@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class LabelSpecification(models.Model):
@@ -28,6 +29,8 @@ class LabelSpecification(models.Model):
     page_description = models.CharField(max_length=250, null=True)
     layout_description = models.CharField(max_length=250, null=True)
     label_description = models.CharField(max_length=250, null=True)
+    created = models.DateTimeField(null=True, editable=False)
+    modified = models.DateTimeField(null=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -56,9 +59,12 @@ class LabelSpecification(models.Model):
         return {k: getattr(self, k) for k in attrs}
 
     def save(self, *args, **kwargs):
+        if not self.id:
+            self.created = timezone.now()
+        self.modified = timezone.now()
         self.page_description = f"{self.sheet_width} x {self.sheet_height}"
         self.layout_description = f"{self.rows} rows x {self.columns} cols"
-        self.label_description = f"{self.label_width}x{self.label_height}"
+        self.label_description = f"{self.label_width} x {self.label_height}"
         super().save(*args, **kwargs)
 
     class Meta:

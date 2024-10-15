@@ -1,4 +1,6 @@
+import csv
 import uuid
+from pathlib import Path
 
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -16,3 +18,14 @@ def copy_label_specification(modeladmin, request, queryset):
         obj.pk = None
         obj.name = uuid.uuid4()
         obj.save()
+
+
+def export_to_csv(modeladmin, request, queryset):
+    filename = Path("~/").expanduser() / "label_specifications.csv"
+    if queryset.count() > 0:
+        fieldnames = [f.name for f in queryset.model._meta.get_fields()]
+        with open(filename, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            for obj in queryset:
+                writer.writerow({fname: getattr(obj, fname) for fname in fieldnames})
