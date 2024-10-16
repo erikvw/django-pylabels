@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management import BaseCommand
 
-from django_labels.models import LabelSpecification
+from django_pylabels.models import LabelSpecification
 
 
 class Command(BaseCommand):

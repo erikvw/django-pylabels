@@ -1,1 +1,1 @@
-include django_labels/templates/*
+include django_pylabels/templates/*

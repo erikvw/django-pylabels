@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("django_labels", "0002_labelspecification_created_and_more"),
+        ("django_pylabels", "0002_labelspecification_created_and_more"),
     ]
 
     operations = [

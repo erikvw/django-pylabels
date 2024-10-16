@@ -1,7 +1,7 @@
 [project]
-name = "django-labels"
+name = "django-pylabels"
 dynamic = ["version"]
-description = "Use pylabels in Django"
+description = "Use pylabels2 in Django"
 readme = "README.md"
 dependencies = ['pylabels2']
 requires-python = '>=3.12'
@@ -34,10 +34,10 @@ skip = [".tox", ".eggs"]
 [tool.coverage.run]
 parallel = false
 branch = true
-source = ["django_labels"]
+source = ["django_pylabels"]
 
 [tool.coverage.paths]
-source = ["django_labels"]
+source = ["django_pylabels"]
 
 [tool.coverage.report]
 show_missing = true
@@ -66,6 +66,6 @@ exclude = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["django_labels*", "django_labels/templates/*.html"]
-exclude = ["django_labels.tests*"]
+include = ["django_pylabels*", "django_pylabels/templates/*.html"]
+exclude = ["django_pylabels.tests*"]
 namespaces = false  # true by default

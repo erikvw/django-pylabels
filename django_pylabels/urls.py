@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import RedirectView
 
-app_name = "django_labels"
+app_name = "django_pylabels"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
