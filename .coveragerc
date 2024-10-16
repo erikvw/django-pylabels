@@ -1,0 +1,4 @@
+[run]
+include = django_labels/*
+omit = django_labels/tests/*
+branch = 1
