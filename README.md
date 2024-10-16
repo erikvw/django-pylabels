@@ -1,2 +1,2 @@
-# django-labels
-Use pylabels with Django
+# django-pylabels
+Use pylabels2 with Django
