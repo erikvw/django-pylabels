@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .actions import copy_label_specification, export_to_csv
 from .models import LabelHistory, LabelSpecification
+from .utils import print_test_label_sheet
 
 
 @admin.register(LabelHistory)
@@ -14,7 +15,7 @@ class LabelHistoryAdmin(admin.ModelAdmin):
 @admin.register(LabelSpecification)
 class LabelSpecificationAdmin(admin.ModelAdmin):
 
-    actions = [copy_label_specification, export_to_csv]
+    actions = [print_test_label_sheet, copy_label_specification, export_to_csv]
 
     list_display = (
         "name",

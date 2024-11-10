@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext as _
-from models import LabelSpecification
+
+from .models import LabelSpecification
 
 
 def get_label_specification(name: str | None) -> LabelSpecification:

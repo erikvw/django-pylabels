@@ -26,9 +26,9 @@ class LabelSpecification(models.Model):
     padding_radius = models.IntegerField(default=0)
     # background_image = models.CharField
     # background_image_filename = models.CharField
-    page_description = models.CharField(max_length=250, null=True)
-    layout_description = models.CharField(max_length=250, null=True)
-    label_description = models.CharField(max_length=250, null=True)
+    page_description = models.CharField(max_length=250, null=True, blank=True)
+    layout_description = models.CharField(max_length=250, null=True, blank=True)
+    label_description = models.CharField(max_length=250, null=True, blank=True)
     created = models.DateTimeField(null=True, editable=False)
     modified = models.DateTimeField(null=True, editable=False)
 
