@@ -25,6 +25,7 @@ def save_to_buffer(
     objects: list,
     draw_label: Callable[[Drawing, int | float, int | float, Any], Drawing],
     label_specification: str | None = None,
+    watermark: tuple[str, tuple[str, int]] | None = None,
 ) -> BytesIO:
     if len(objects) == 0:
         return blank_buffer()
@@ -32,4 +33,4 @@ def save_to_buffer(
     specs = Specification(**obj.as_dict)
     sheet = Sheet(specs, draw_label, border=obj.border)
     sheet.add_labels(objects)
-    return sheet.save_to_buffer()
+    return sheet.save_to_buffer(watermark)
