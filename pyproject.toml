@@ -15,6 +15,12 @@ classifiers = [
 ]
 license = {file = "LICENSE"}
 
+[project.urls]
+Homepage = "https://github.com/erikvw/django-pylabels"
+Documentation = "https://github.com/erikvw/django-pylabels/blob/README.rst"
+Repository = "https://github.com/erikvw/django-pylabels.git"
+Changelog = "https://github.com/erikvw/django-pylabels/blob/main/CHANGES"
+
 [build-system]
 requires = ["setuptools>=60", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
@@ -22,14 +28,19 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 version_file="_version.py"
 
+[tool.setuptools.packages.find]
+include = ["django_pylabels*", "django_pylabels/templates/*.html"]
+exclude = ["django_pylabels.tests*"]
+namespaces = false  # true by default
+
 [tool.black]
-line-length = 95
+line-length = 88
 target-version = ["py312"]
 
 [tool.isort]
 profile = "black"
 py_version = "312"
-skip = [".tox", ".eggs"]
+skip = [".tox", ".eggs", "migrations", "_version.py"]
 
 [tool.coverage.run]
 parallel = false
@@ -46,26 +57,3 @@ exclude_lines = [
   "pragma: no cover",
   "if TYPE_CHECKING:",
 ]
-
-[tool.flake8]
-ignore = ['E226','W503','E203','W605']
-per-file-ignores = [
-    '__init__.py:F401',
-]
-max-line-length = 95
-max-complexity = 10
-count = true
-exclude = [
-    '*/migrations/*',
-    '.tox',
-    '.git',
-    '__pycache__',
-    'build',
-    'dist',
-    '.eggs'
-]
-
-[tool.setuptools.packages.find]
-include = ["django_pylabels*", "django_pylabels/templates/*.html"]
-exclude = ["django_pylabels.tests*"]
-namespaces = false  # true by default

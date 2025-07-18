@@ -31,4 +31,7 @@ def print_test_label_sheet(request, queryset, drawing_func: Callable, label_data
         sheet.add_labels([label_data_cls() for i in range(0, obj.rows * obj.columns)])
         buffer = sheet.save_to_buffer()
 
-        return FileResponse(buffer, as_attachment=True, filename=f"test_print_{obj.name}.pdf")
+        return FileResponse(
+            buffer, as_attachment=True, filename=f"test_print_{obj.name}.pdf"
+        )
+    return None
