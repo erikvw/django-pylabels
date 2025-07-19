@@ -21,6 +21,12 @@ Documentation = "https://github.com/erikvw/django-pylabels/blob/README.rst"
 Repository = "https://github.com/erikvw/django-pylabels.git"
 Changelog = "https://github.com/erikvw/django-pylabels/blob/main/CHANGES"
 
+[project.optional-dependencies]
+test = [
+    "coverage",
+    "pylabels2",
+]
+
 [build-system]
 requires = ["setuptools>=60", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
@@ -57,3 +63,47 @@ exclude_lines = [
   "pragma: no cover",
   "if TYPE_CHECKING:",
 ]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+    py{312}-dj{52,dev},
+    lint
+
+isolated_build = true
+
+[gh-actions]
+python =
+    3.12: py312, lint
+
+[gh-actions:env]
+DJANGO =
+    5.2: dj52
+    dev: djdev, lint
+
+[testenv]
+deps =
+    pre-commit
+    edc-test-utils
+    edc-test-settings
+    coverage[toml]
+    tox
+    tox-gh-actions
+    dj52: Django>=5.2,<5.3
+    djdev: https://github.com/django/django/tarball/main
+
+commands =
+    pip install -U pip
+    pip --version
+    pip freeze
+    coverage run -a runtests.py
+    coverage report
+
+[testenv:lint]
+deps = -r https://raw.githubusercontent.com/clinicedc/edc/develop/requirements.tests/lint.txt
+commands =
+    isort --profile=black --check --diff .
+    black --check --diff .
+    flake8 .
+"""
