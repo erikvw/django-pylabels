@@ -3,6 +3,10 @@ from django.utils import timezone
 
 
 class LabelSpecification(models.Model):
+    """Label specification model.
+
+    Defaults are sane for an A4 sheet of 2 cols x 6 rows.
+    """
 
     name = models.CharField(max_length=50, default="default", unique=True, blank=False)
     sheet_width = models.FloatField(default=210.0, blank=False)

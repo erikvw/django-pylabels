@@ -2,6 +2,7 @@
 exclude: tests/etc/user-*
 
 repos:
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -13,7 +14,8 @@ repos:
     rev: 1.8.6
     hooks:
       - id: bandit
-        args: ["-x *test*.py"]
+        args:
+          - "-x *test*.py"
 
   - repo: https://github.com/psf/black
     rev: 25.1.0
@@ -41,8 +43,10 @@ repos:
       - id: check-executables-have-shebangs
       - id: check-merge-conflict
       - id: check-toml
+      - id: check-yaml
       - id: debug-statements
       - id: detect-private-key
+      - id: end-of-file-fixer
       - id: fix-byte-order-marker
       - id: requirements-txt-fixer
         files: requirements/.*\.txt$
