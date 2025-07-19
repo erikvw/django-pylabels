@@ -16,10 +16,16 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.BigAutoField(
-                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
                     ),
                 ),
-                ("reference", models.CharField(help_text="Label reference", max_length=10)),
+                (
+                    "reference",
+                    models.CharField(help_text="Label reference", max_length=10),
+                ),
                 (
                     "object_reference",
                     models.CharField(help_text="Object reference", max_length=100),
@@ -33,10 +39,16 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.BigAutoField(
-                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField(default="default", max_length=50, unique=True)),
+                (
+                    "name",
+                    models.CharField(default="default", max_length=50, unique=True),
+                ),
                 ("sheet_width", models.FloatField(default=210.0)),
                 ("sheet_height", models.FloatField(default=297.0)),
                 ("columns", models.IntegerField(default=2)),

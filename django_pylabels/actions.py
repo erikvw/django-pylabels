@@ -1,8 +1,11 @@
 import csv
+import io
 import uuid
-from pathlib import Path
+from zoneinfo import ZoneInfo
 
+from dateutil.utils import today
 from django.contrib import messages
+from django.http import FileResponse
 from django.utils.translation import gettext as _
 
 
@@ -21,11 +24,18 @@ def copy_label_specification(modeladmin, request, queryset):
 
 
 def export_to_csv(modeladmin, request, queryset):
-    filename = Path("~/").expanduser() / "label_specifications.csv"
     if queryset.count() > 0:
         fieldnames = [f.name for f in queryset.model._meta.get_fields()]
-        with open(filename, "w", newline="") as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
-            for obj in queryset:
-                writer.writerow({fname: getattr(obj, fname) for fname in fieldnames})
+        buffer = io.StringIO()
+        writer = csv.DictWriter(buffer, fieldnames=fieldnames)
+        writer.writeheader()
+        for obj in queryset:
+            writer.writerow({fname: getattr(obj, fname) for fname in fieldnames})
+        buffer.seek(0)
+        formatted_now = today(tzinfo=ZoneInfo("utc")).strftime("%Y-%m-%d %H:%M")
+        return FileResponse(
+            buffer,
+            as_attachment=True,
+            filename=f"label_specifications_{formatted_now}.csv",
+        )
+    return None
