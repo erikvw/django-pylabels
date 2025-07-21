@@ -25,10 +25,10 @@ Repository = "https://github.com/erikvw/django-pylabels.git"
 Changelog = "https://github.com/erikvw/django-pylabels/blob/main/CHANGES"
 
 [project.optional-dependencies]
-test = ["coverage", "edc_test_settings"]
+test = ["coverage", "edc_test_settings", "edc_utils"]
 
 [build-system]
-requires = ["setuptools>=60", "setuptools-scm>=8.0"]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
