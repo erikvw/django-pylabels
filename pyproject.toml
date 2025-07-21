@@ -25,7 +25,10 @@ Repository = "https://github.com/erikvw/django-pylabels.git"
 Changelog = "https://github.com/erikvw/django-pylabels/blob/main/CHANGES"
 
 [project.optional-dependencies]
-test = ["coverage"]
+test = [
+    "edc-test-settings",
+    "edc-utils",
+]
 
 [build-system]
 requires = ["setuptools>=64", "setuptools-scm>=8"]
@@ -88,6 +91,7 @@ deps =
     pre-commit
     edc-test-utils
     edc-test-settings
+    edc-utils
     coverage[toml]
     tox
     tox-gh-actions
