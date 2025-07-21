@@ -8,12 +8,15 @@ requires-python = '>=3.12'
 keywords = ['Django labels avery pylabels2']
 authors = [{name="Erik van Widenfelt", email="ew2789@gmail.com"}]
 classifiers = [
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Operating System :: OS Independent",
-    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
-license = {file = "LICENSE"}
+license = "GPL-3.0-or-later"
+license-files = ["LICEN[CS]E*"]
 
 [project.urls]
 Homepage = "https://github.com/erikvw/django-pylabels"
@@ -31,8 +34,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 version_file="_version.py"
 
+
 [tool.setuptools.packages.find]
-include = ["django_pylabels*", "django_pylabels/templates/*.html"]
+include = ["django_pylabels*", "django_pylabels/templates/django_pylabels/*.html"]
 exclude = ["django_pylabels.tests*"]
 namespaces = false  # true by default
 

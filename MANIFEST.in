@@ -1,1 +1,2 @@
-include django_pylabels/templates/*
+include django_pylabels/templates/django_pylabels/*.html
+recursive-exclude django_pylabels/tests *
