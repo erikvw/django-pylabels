@@ -2,7 +2,7 @@
 name = "django-pylabels"
 dynamic = ["version"]
 description = "Use pylabels2 in Django"
-readme = "README.md"
+readme = {file = "README.rst", content-type = "text/x-rst"}
 dependencies = ['pylabels2', 'reportlab', 'python-dateutil']
 requires-python = '>=3.12'
 keywords = ['Django labels avery pylabels2']
