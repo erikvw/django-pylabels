@@ -32,7 +32,7 @@ def export_to_csv(modeladmin, request, queryset):
         for obj in queryset:
             writer.writerow({fname: getattr(obj, fname) for fname in fieldnames})
         buffer.seek(0)
-        formatted_now = today(tzinfo=ZoneInfo("utc")).strftime("%Y-%m-%d %H:%M")
+        formatted_now = today(tzinfo=ZoneInfo("UTC")).strftime("%Y-%m-%d %H:%M")
         return FileResponse(
             buffer,
             as_attachment=True,
