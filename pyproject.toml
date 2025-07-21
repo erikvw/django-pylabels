@@ -3,17 +3,29 @@ name = "django-pylabels"
 dynamic = ["version"]
 description = "Use pylabels2 in Django"
 readme = "README.md"
-dependencies = ['pylabels2']
+dependencies = ['pylabels2', 'reportlab', 'python-dateutil']
 requires-python = '>=3.12'
 keywords = ['Django labels avery pylabels2']
 authors = [{name="Erik van Widenfelt", email="ew2789@gmail.com"}]
 classifiers = [
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Operating System :: OS Independent",
-    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
-license = {file = "LICENSE"}
+license = "GPL-3.0-or-later"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/erikvw/django-pylabels"
+Documentation = "https://github.com/erikvw/django-pylabels/blob/README.rst"
+Repository = "https://github.com/erikvw/django-pylabels.git"
+Changelog = "https://github.com/erikvw/django-pylabels/blob/main/CHANGES"
+
+[project.optional-dependencies]
+test = ["coverage", "edc_test_settings"]
 
 [build-system]
 requires = ["setuptools>=60", "setuptools-scm>=8.0"]
@@ -22,14 +34,20 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 version_file="_version.py"
 
+
+[tool.setuptools.packages.find]
+include = ["django_pylabels*", "django_pylabels/templates/django_pylabels/*.html"]
+exclude = ["django_pylabels.tests*"]
+namespaces = false  # true by default
+
 [tool.black]
-line-length = 95
+line-length = 88
 target-version = ["py312"]
 
 [tool.isort]
 profile = "black"
 py_version = "312"
-skip = [".tox", ".eggs"]
+skip = [".tox", ".eggs", "migrations", "_version.py"]
 
 [tool.coverage.run]
 parallel = false
@@ -47,25 +65,46 @@ exclude_lines = [
   "if TYPE_CHECKING:",
 ]
 
-[tool.flake8]
-ignore = ['E226','W503','E203','W605']
-per-file-ignores = [
-    '__init__.py:F401',
-]
-max-line-length = 95
-max-complexity = 10
-count = true
-exclude = [
-    '*/migrations/*',
-    '.tox',
-    '.git',
-    '__pycache__',
-    'build',
-    'dist',
-    '.eggs'
-]
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+    py{312}-dj{52,dev},
+    lint
 
-[tool.setuptools.packages.find]
-include = ["django_pylabels*", "django_pylabels/templates/*.html"]
-exclude = ["django_pylabels.tests*"]
-namespaces = false  # true by default
+isolated_build = true
+
+[gh-actions]
+python =
+    3.12: py312, lint
+
+[gh-actions:env]
+DJANGO =
+    5.2: dj52
+    dev: djdev, lint
+
+[testenv]
+deps =
+    pre-commit
+    edc-test-utils
+    edc-test-settings
+    coverage[toml]
+    tox
+    tox-gh-actions
+    dj52: Django>=5.2,<5.3
+    djdev: https://github.com/django/django/tarball/main
+
+commands =
+    pip install -U pip
+    pip --version
+    pip freeze
+    coverage run -a runtests.py
+    coverage report
+
+[testenv:lint]
+deps = -r https://raw.githubusercontent.com/clinicedc/edc/develop/requirements.tests/lint.txt
+commands =
+    isort --profile=black --check --diff .
+    black --check --diff .
+    flake8 .
+"""

@@ -51,9 +51,14 @@ class PrintLabelsViewMixin:
 
     def get_label_filename(self, request: WSGIRequest) -> str:
         timestamp = (
-            datetime.now().astimezone(ZoneInfo(settings.TIME_ZONE)).strftime("%Y%m%d%H%M%S")
+            datetime.now()
+            .astimezone(ZoneInfo(settings.TIME_ZONE))
+            .strftime("%Y%m%d%H%M%S")
         )
-        return request.GET.get("filename") or f"{self.label_filename_prefix}_{timestamp}.pdf"
+        return (
+            request.GET.get("filename")
+            or f"{self.label_filename_prefix}_{timestamp}.pdf"
+        )
 
     def update_label_history(self, objects: list) -> None:
         pass
